@@ -49,7 +49,6 @@ const Skills = () => {
       skills: [
         { icon: <GitBranch size={22} />, title: 'Git', level: 80, gradient: 'from-violet-500 to-purple-600' },
         { icon: <Globe size={22} />, title: 'RESTful APIs', level: 70, gradient: 'from-yellow-500 to-yellow-600' },
-        { icon: <Database size={22} />, title: 'Firebase', level: 60, gradient: 'from-red-500 to-pink-600' },
         { icon: <Server size={22} />, title: 'Vite', level: 75, gradient: 'from-purple-500 to-indigo-600' },
       ],
     },
