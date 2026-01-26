@@ -1,8 +1,16 @@
+
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Mail, MapPin, Phone, Send, Linkedin, Github, Facebook } from 'lucide-react';
 
+type FormData = {
+  name: string;
+  email: string;
+  message: string;
+};
+
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     message: '',
@@ -10,25 +18,46 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+  const [isError, setIsError] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitMessage('');
+    setIsError(false);
 
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 
-    setSubmitMessage('Thank you! Your message has been sent successfully.');
-    setFormData({ name: '', email: '', message: '' });
-    setIsSubmitting(false);
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('Missing EmailJS environment variables.');
+      }
 
-    setTimeout(() => setSubmitMessage(''), 5000);
+      // Must match your EmailJS template variables
+      const templateParams = {
+        from_name: formData.name,
+        reply_to: formData.email,
+        message: formData.message,
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, { publicKey });
+
+      setSubmitMessage('Thank you! Your message has been sent successfully.');
+      setFormData({ name: '', email: '', message: '' });
+    } catch {
+      setIsError(true);
+      setSubmitMessage('Oops! Something went wrong. Please try again or email me directly.');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitMessage(''), 6000);
+    }
   };
 
   const socialLinks = [
@@ -54,9 +83,8 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Let's Talk</h3>
               <p className="text-gray-600 mb-8 leading-relaxed">
-                I'm always open to discussing new projects, creative ideas, or opportunities to
-                be part of your vision. Feel free to reach out through the form or connect with
-                me on social media.
+                I'm open to discussing projects, creative ideas, or internship opportunities.
+                Reach out via the form or connect on social media.
               </p>
             </div>
 
@@ -94,7 +122,7 @@ const Contact = () => {
 
             <div className="pt-6">
               <p className="text-gray-900 font-semibold mb-4">Connect With Me</p>
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-wrap">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
@@ -171,7 +199,11 @@ const Contact = () => {
               </button>
 
               {submitMessage && (
-                <div className="bg-green-50 text-green-700 px-4 py-3 rounded-lg text-center">
+                <div
+                  className={`px-4 py-3 rounded-lg text-center ${
+                    isError ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'
+                  }`}
+                >
                   {submitMessage}
                 </div>
               )}
@@ -184,3 +216,6 @@ const Contact = () => {
 };
 
 export default Contact;
+
+
+
