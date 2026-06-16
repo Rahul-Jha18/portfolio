@@ -28,9 +28,7 @@ export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
     observer.observe(element);
 
     return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
+      if (element) observer.unobserve(element);
     };
   }, [options.threshold, options.rootMargin]);
 

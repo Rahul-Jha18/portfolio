@@ -1,186 +1,275 @@
-// src/components/About.tsx
-import { useEffect, useMemo, useState } from "react";
-import profilePic from "../assets/p2.jpg";
-import { GraduationCap, Briefcase, Heart, Code2, MapPin, Target, Sparkles } from "lucide-react";
-
-const cx = (...a: (string | false | null | undefined)[]) => a.filter(Boolean).join(" ");
+import { useEffect, useMemo, useState } from 'react';
+import profilePic from '../assets/p2.jpg';
+import {
+  GraduationCap,
+  Briefcase,
+  Code2,
+  Music,
+  Gamepad2,
+  MapPin,
+  Target,
+  Pencil,
+  User,
+} from 'lucide-react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const About = () => {
+  const { elementRef, isVisible } = useScrollAnimation({ threshold: 0.1 });
   const [projectsCount, setProjectsCount] = useState(0);
 
-  // counter animation
   useEffect(() => {
+    if (!isVisible) return;
+
     let start = 0;
-    const end = 7; // change if you want
+    const end = 7;
+
     const interval = setInterval(() => {
       start += 1;
       setProjectsCount(start);
+
       if (start >= end) clearInterval(interval);
-    }, 160);
+    }, 120);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [isVisible]);
 
   const quickFacts = useMemo(
     () => [
       {
-        icon: <GraduationCap className="w-6 h-6" />,
-        title: "Study",
-        value: "IT Student",
-        sub: "Learning, building, improving",
+        icon: <GraduationCap size={20} />,
+        title: 'Education',
+        value: 'IT Student',
+        sub: 'Learning, building, growing',
+        color: 'from-violet-500 to-purple-600',
+        glow: 'rgba(139,92,246,0.3)',
       },
       {
-        icon: <Briefcase className="w-6 h-6" />,
-        title: "Current",
-        value: "Web Developer Intern",
-        sub: "Nepal Life Insurance",
+        icon: <Briefcase size={20} />,
+        title: 'Experience',
+        value: 'Software Web Developer',
+        sub: 'Full-time at Nepal Life Insurance',
+        color: 'from-cyan-500 to-blue-600',
+        glow: 'rgba(6,182,212,0.3)',
       },
       {
-        icon: <Code2 className="w-6 h-6" />,
-        title: "Projects",
+        icon: <Code2 size={20} />,
+        title: 'Projects',
         value: `${projectsCount}+`,
-        sub: "Real systems + UI work",
+        sub: 'Real systems & UI work',
+        color: 'from-emerald-500 to-teal-600',
+        glow: 'rgba(16,185,129,0.3)',
       },
     ],
     [projectsCount]
   );
 
-  return (
-    <section id="about" className="relative min-h-screen py-24 flex items-center justify-center overflow-hidden">
-      {/* Background (premium, neutral, subtle red) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-100 via-white to-slate-50" />
-      <div className="absolute -top-24 right-16 w-80 h-80 bg-black/10 blur-3xl rounded-full" />
-      <div className="absolute bottom-0 left-10 w-96 h-96 bg-red-500/10 blur-3xl rounded-full" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55rem] h-[55rem] bg-black/5 blur-[110px] rounded-full" />
+  const hobbies = [
+    { icon: <Music size={14} />, text: 'Music' },
+    { icon: <Pencil size={14} />, text: 'Sketching' },
+    { icon: <Gamepad2 size={14} />, text: 'Gaming' },
+    { icon: <MapPin size={14} />, text: 'Exploring' },
+    { icon: <Target size={14} />, text: 'Full Stack Goal' },
+  ];
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* heading */}
-        <div className="text-center mb-16 animate-[fadeUp_800ms_ease-out]">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-black/10 bg-white/60 backdrop-blur shadow-sm">
-            <Sparkles className="w-4 h-4 text-red-600" />
-            <span className="text-sm font-semibold text-gray-800">Get to know me</span>
+  const hobbyColors = [
+    'border-violet-500/30 bg-violet-500/[0.08] text-violet-300',
+    'border-cyan-500/30 bg-cyan-500/[0.08] text-cyan-300',
+    'border-emerald-500/30 bg-emerald-500/[0.08] text-emerald-300',
+    'border-fuchsia-500/30 bg-fuchsia-500/[0.08] text-fuchsia-300',
+    'border-amber-500/30 bg-amber-500/[0.08] text-amber-300',
+  ];
+
+  return (
+    <section id="about" className="relative py-28 bg-[#070c1a] overflow-hidden">
+      {/* Background glows */}
+      <div className="absolute top-20 left-0 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[100px]" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-cyan-600/10 rounded-full blur-[100px]" />
+      <div
+        className="absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
+        }}
+      />
+
+      <div ref={elementRef} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section header */}
+        <div
+          className={`text-center mb-20 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/[0.08] text-violet-300 text-xs font-semibold uppercase tracking-widest mb-5">
+            <User size={12} />
+            About Me
           </div>
 
-          <h2 className="mt-4 text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
-            About Me
+          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight">
+            The person{' '}
+            <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">
+              behind the code
+            </span>
           </h2>
-          <div className="w-28 h-[3px] bg-gradient-to-r from-black/70 via-red-600 to-black/70 mx-auto rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-14 items-center">
-          {/* image */}
-          <div className="flex justify-center animate-[fadeUp_1000ms_ease-out]">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Image column */}
+          <div
+            className={`flex justify-center transition-all duration-700 delay-200 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+            }`}
+          >
             <div className="relative">
-              {/* glow + ring */}
-              <div className="absolute -inset-3 rounded-full bg-red-500/10 blur-2xl" />
-              <div className="absolute inset-0 rounded-full ring-1 ring-black/10" />
-              <img
-                src={profilePic}
-                alt="Rahul Kumar Jha"
-                className="relative w-72 h-72 md:w-80 md:h-80 rounded-full object-cover border-4 border-white shadow-[0_30px_70px_rgba(0,0,0,0.22)]"
+              {/* Rotating ring */}
+              <div
+                className="absolute -inset-4 rounded-full border border-dashed border-violet-500/20 animate-spin"
+                style={{ animationDuration: '20s' }}
+              />
+              <div
+                className="absolute -inset-8 rounded-full border border-dashed border-cyan-500/10 animate-spin"
+                style={{
+                  animationDuration: '35s',
+                  animationDirection: 'reverse',
+                }}
               />
 
-              {/* small badge */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-5 py-2 rounded-full bg-black text-white font-bold text-sm shadow-lg border border-white/10">
-                Rahul Kumar Jha
+              {/* Glow */}
+              <div className="absolute inset-0 rounded-full bg-violet-500/20 blur-3xl" />
+              <div className="absolute inset-0 rounded-full bg-cyan-500/10 blur-2xl" />
+
+              {/* Image */}
+              <div className="relative w-72 h-72 md:w-80 md:h-80 rounded-full overflow-hidden ring-2 ring-white/10 shadow-[0_0_80px_rgba(139,92,246,0.3)]">
+                <img
+                  src={profilePic}
+                  alt="Rahul Kumar Jha"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#070c1a]/40 to-transparent" />
+              </div>
+
+              {/* Floating badge */}
+              <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 px-5 py-2 rounded-2xl bg-gradient-to-r from-violet-600 to-cyan-600 text-white font-black text-sm shadow-[0_8px_32px_rgba(139,92,246,0.5)] whitespace-nowrap">
+                Rahul Kumar Jha ✦
+              </div>
+
+              {/* Side tags */}
+              <div className="absolute -left-6 top-1/4 px-3 py-1.5 rounded-xl bg-[#0d1224] border border-white/[0.08] text-white/60 text-xs font-semibold shadow-lg rotate-[-6deg]">
+                React ⚛️
+              </div>
+              <div className="absolute -right-6 top-2/3 px-3 py-1.5 rounded-xl bg-[#0d1224] border border-white/[0.08] text-white/60 text-xs font-semibold shadow-lg rotate-[6deg]">
+                TypeScript 💙
               </div>
             </div>
           </div>
 
-          {/* content */}
-          <div className="space-y-6 animate-[fadeUp_1200ms_ease-out]">
-            <h3 className="text-2xl md:text-3xl font-black text-gray-900">
-              Hello, I’m Rahul 👋
+          {/* Content column */}
+          <div
+            className={`space-y-7 transition-all duration-700 delay-300 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}
+          >
+            <h3 className="text-2xl md:text-3xl font-black text-white leading-tight">
+              Hello! I'm Rahul 👋
             </h3>
 
-            {/* upgraded paragraphs */}
-            <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+            <div className="space-y-4 text-[#94a3b8] text-base leading-relaxed">
               <p>
-                I’m <span className="font-bold text-gray-900">Rahul Kumar Jha</span>, an{" "}
-                <span className="font-semibold">IT student</span> who loves building modern web
-                applications that feel fast, clean, and easy to use.
+                I'm <span className="text-white font-bold">Rahul Kumar Jha</span>, an IT
+                student and  web developer passionate about building modern, fast,
+                and user-first web applications.
               </p>
 
               <p>
-                Right now, I’m working as a{" "}
-                <span className="font-bold text-gray-900">Web Developer Intern</span> at{" "}
-                <span className="font-semibold">Nepal Life Insurance</span>, where I get hands-on
-                experience creating real features—dashboards, modules, and systems that solve real
-                problems.
+                I completed my{' '}
+                <span className="text-cyan-400 font-bold">
+                  Web Development Internship at Nepal Life Insurance
+                </span>{' '}
+                on <span className="text-white font-bold">February</span>, and I am now
+                working there as a{' '}
+                <span className="text-cyan-400 font-bold">
+                  full-time Software Web Developer at Contractual Position
+                </span>
+                .
               </p>
 
               <p>
-                My goal is to become a{" "}
-                <span className="font-bold text-gray-900">Full Stack Developer</span> and build
-                complete products—from UI to backend APIs and databases. I care about good UX,
-                clear code, and building things that are actually useful.
+                My work focuses on building real production features, including dashboards,
+                digital library modules, asset modules, APIs, and database-driven systems
+                that solve real business problems.
+              </p>
+
+              <p>
+                My mission is to grow as a{' '}
+                <span className="text-violet-400 font-bold">Full Stack Developer</span> and
+                ship complete products from the ground up — beautiful UI, robust APIs, and
+                solid databases. I care deeply about clean code, learning consistently, and
+                building systems that create real value.
               </p>
             </div>
 
-            {/* hobby + future plan chips */}
-            <div className="flex flex-wrap gap-2 pt-2">
-              {[
-                { icon: <Heart className="w-4 h-4" />, text: "Music" },
-                { icon: <Heart className="w-4 h-4" />, text: "Sketching" },
-                { icon: <Heart className="w-4 h-4" />, text: "Gaming" },
-                { icon: <MapPin className="w-4 h-4" />, text: "Exploring new places" },
-                { icon: <Target className="w-4 h-4" />, text: "Full Stack Career" },
-              ].map((x, i) => (
+            {/* Hobby chips */}
+            <div className="flex flex-wrap gap-2 pt-1">
+              {hobbies.map((h, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-black/10 bg-white/70 backdrop-blur text-sm font-semibold text-gray-800 shadow-sm"
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all duration-200 hover:scale-105 ${hobbyColors[i]}`}
                 >
-                  <span className="text-red-600">{x.icon}</span>
-                  {x.text}
+                  {h.icon} {h.text}
                 </span>
               ))}
             </div>
 
-            {/* info cards (premium style) */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
+            {/* Quick fact cards */}
+            <div className="grid grid-cols-3 gap-3 pt-2">
               {quickFacts.map((card, idx) => (
                 <div
                   key={idx}
-                  className={cx(
-                    "group rounded-2xl p-5",
-                    "border border-black/10 bg-white/70 backdrop-blur",
-                    "shadow-[0_14px_35px_rgba(0,0,0,0.08)]",
-                    "hover:shadow-[0_22px_55px_rgba(239,68,68,0.12)]",
-                    "transition-all duration-500 hover:-translate-y-1"
-                  )}
+                  className="relative group rounded-2xl p-4 border border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-300 overflow-hidden cursor-default"
+                  style={{ boxShadow: `0 0 0 0 ${card.glow}` }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${card.glow}`;
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.boxShadow = `0 0 0 0 ${card.glow}`;
+                  }}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="w-11 h-11 rounded-xl bg-black/5 border border-black/10 flex items-center justify-center text-red-600">
-                      {card.icon}
-                    </div>
-                    <span className="text-xs font-extrabold text-gray-600 uppercase tracking-wider">
-                      {card.title}
-                    </span>
+                  <div
+                    className={`w-9 h-9 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center text-white mb-3 shadow-lg`}
+                  >
+                    {card.icon}
                   </div>
 
-                  <div className="mt-4">
-                    <div className="text-lg font-black text-gray-900">{card.value}</div>
-                    <div className="text-sm text-gray-600 mt-1">{card.sub}</div>
+                  <div className="text-lg font-black text-white leading-none mb-1">
+                    {card.value}
                   </div>
+
+                  <div className="text-[11px] font-semibold text-white/40 uppercase tracking-wider">
+                    {card.title}
+                  </div>
+
+                  <div className="text-[11px] text-white/30 mt-0.5">{card.sub}</div>
                 </div>
               ))}
             </div>
 
-            {/* small closing line */}
-            <div className="pt-2 text-gray-700">
-              <span className="font-bold text-gray-900">Currently focusing on:</span>{" "}
-              React + TypeScript, clean UI, backend APIs, and building full-stack projects end-to-end.
+            {/* Currently focusing */}
+            <div className="flex items-start gap-3 p-4 rounded-2xl border border-amber-500/20 bg-amber-500/[0.05]">
+              <span className="text-amber-400 mt-0.5">⚡</span>
+              <div>
+                <span className="text-amber-300 font-bold text-sm">
+                  Currently focused on:{' '}
+                </span>
+                <span className="text-white/50 text-sm">
+                  Building a Digital Library System using React 18 and ASP.NET 10, while
+                  learning ASP.NET and Entity Framework day by day with senior guidance and
+                  determination.
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* keyframes */}
-      <style>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(18px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </section>
   );
 };
