@@ -61,11 +61,8 @@ const Navbar = () => {
               onClick={() => scrollToSection('home')}
               className="flex items-center gap-2 group"
             >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center shadow-[0_0_16px_rgba(139,92,246,0.5)] group-hover:shadow-[0_0_24px_rgba(139,92,246,0.7)] transition-all duration-300">
-                <Terminal size={15} className="text-white" />
-              </div>
               <span className="text-base font-black tracking-tight text-white">
-                Rahul<span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">.</span>
+              <span className="text-2xl bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Rahul Kumar Jha</span>
               </span>
             </button>
 

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { ExternalLink, Github, X, Sparkles, ArrowUpRight, Tag, Search, FolderOpen } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import Image from '../assets/image.png';
+import Pic from '../assets/image.png';
 
 type Project = {
   title: string;
@@ -43,7 +43,7 @@ const Projects = () => {
         title: 'Nepal Life Digital Library System',
         description:
           'Enterprise document management and internal memo workflow system for Nepal Life Insurance — secure document upload, department-wise access, memo approval flow, audit tracking, and digital library search.',
-        image: Image,
+        image: Pic,
         tags: ['React', 'TypeScript', '.NET', 'SQL Server'],
         category: 'Enterprise System',
         githubLink: 'https://github.com/Rahul-Jha18/Digital-library-Main',
