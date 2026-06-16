@@ -54,7 +54,6 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050810]">
-      {/* Aurora background layers */}
       <div className="absolute inset-0">
         <div
           className="absolute w-[700px] h-[700px] rounded-full blur-[120px] opacity-20 transition-transform duration-700 ease-out"
@@ -84,7 +83,6 @@ const Hero = () => {
         />
       </div>
 
-      {/* Dot grid */}
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
@@ -93,7 +91,6 @@ const Hero = () => {
         }}
       />
 
-      {/* Floating particles */}
       {[...Array(6)].map((_, i) => (
         <div
           key={i}
@@ -111,7 +108,6 @@ const Hero = () => {
       ))}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
-        {/* Status badge */}
         <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/[0.08] text-emerald-400 text-sm font-medium mb-8 animate-[fadeUp_600ms_ease-out_both]">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -120,7 +116,6 @@ const Hero = () => {
           Open to opportunities & collaboration
         </div>
 
-        {/* Main headline */}
         <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white mb-6 animate-[fadeUp_800ms_ease-out_both]">
           Hi, I'm{' '}
           <span className="relative inline-block">
@@ -140,7 +135,6 @@ const Hero = () => {
           </span>
         </h1>
 
-        {/* Typing line */}
         <div className="flex items-center justify-center gap-3 mb-6 animate-[fadeUp_1000ms_ease-out_both]">
           <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-transparent to-white/20" />
           <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white/70">
@@ -150,12 +144,10 @@ const Hero = () => {
           <div className="h-px flex-1 max-w-[80px] bg-gradient-to-l from-transparent to-white/20" />
         </div>
 
-        {/* Description */}
         <p className="text-base sm:text-lg text-white/50 max-w-xl mx-auto leading-relaxed mb-10 animate-[fadeUp_1200ms_ease-out_both]">
           IT student & Web Developer Intern at Nepal Life Insurance. I craft fast, clean, and user-focused web experiences — from pixel-perfect UI to solid backend APIs.
         </p>
 
-        {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-[fadeUp_1400ms_ease-out_both]">
           <button
             onClick={scrollToContact}
@@ -185,7 +177,6 @@ const Hero = () => {
           </a>
         </div>
 
-        {/* Stats row */}
         <div className="inline-flex flex-wrap justify-center gap-8 animate-[fadeUp_1600ms_ease-out_both]">
           {stats.map((s, i) => (
             <div key={i} className="flex flex-col items-center gap-1">
@@ -201,7 +192,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
         <span className="text-white/30 text-xs tracking-widest uppercase">Scroll</span>
         <div className="w-[1px] h-8 bg-gradient-to-b from-white/30 to-transparent" />

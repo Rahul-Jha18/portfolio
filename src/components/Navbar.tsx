@@ -56,7 +56,6 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="h-16 flex items-center justify-between">
-            {/* Logo */}
             <button
               onClick={() => scrollToSection('home')}
               className="flex items-center gap-2 group"
@@ -66,7 +65,6 @@ const Navbar = () => {
               </span>
             </button>
 
-            {/* Desktop Links */}
             <div className="hidden md:flex items-center gap-1 bg-white/[0.04] border border-white/[0.08] rounded-2xl px-2 py-1.5 backdrop-blur-sm">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.id;
@@ -89,7 +87,6 @@ const Navbar = () => {
               })}
             </div>
 
-            {/* CTA */}
             <button
               onClick={() => scrollToSection('contact')}
               className="hidden md:flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-white text-sm font-bold shadow-[0_0_20px_rgba(139,92,246,0.35)] hover:shadow-[0_0_30px_rgba(139,92,246,0.55)] hover:scale-105 transition-all duration-300"
@@ -97,7 +94,6 @@ const Navbar = () => {
               Hire Me
             </button>
 
-            {/* Mobile Toggle */}
             <button
               onClick={() => setIsOpen((p) => !p)}
               className="md:hidden w-9 h-9 rounded-xl bg-white/[0.08] border border-white/[0.12] flex items-center justify-center text-white hover:bg-white/[0.12] transition"
@@ -108,8 +104,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-
-      {/* Mobile Drawer */}
       <div
         className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'

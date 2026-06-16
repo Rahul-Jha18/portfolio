@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+
 import { Mail, MapPin, Phone, Send, Linkedin, Github, Facebook, MessageCircle, CheckCircle, AlertCircle } from 'lucide-react';
 
 type FormData = { name: string; email: string; message: string };
@@ -81,7 +82,6 @@ const Contact = () => {
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-500/30 bg-violet-500/[0.08] text-violet-300 text-xs font-semibold uppercase tracking-widest mb-5">
             <MessageCircle size={12} />
@@ -99,7 +99,6 @@ const Contact = () => {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-10">
-          {/* Left: info */}
           <div className="lg:col-span-2 space-y-6">
             <div>
               <h3 className="text-xl font-black text-white mb-2">Contact Info</h3>
@@ -108,7 +107,6 @@ const Contact = () => {
               </p>
             </div>
 
-            {/* Info cards */}
             <div className="space-y-3">
               {contactInfo.map((info, i) => (
                 <div
