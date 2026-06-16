@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-
 interface ScrollAnimationOptions {
   threshold?: number;
   rootMargin?: string;
